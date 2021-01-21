@@ -6,4 +6,7 @@ class User < ApplicationRecord
 
   has_many :items
   has_one_attached :image
+  has_one          :profile
+
+  delegate :name, :detail, :image, to: :profile
 end
