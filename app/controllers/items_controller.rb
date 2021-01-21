@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
 
+  before_action :find_item, only: [:show, :edit, :update, :destroy]
+
   def index
     @items = Item.all.order(created_at: :desc)
   end
@@ -42,7 +44,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:title, :content, :price).merge(user_id: current_user.id)
+    params.require(:item).permit(:title, :content, :price, images:[]).merge(user_id: current_user.id)
   end
 
   def find_item
